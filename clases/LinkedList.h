@@ -195,23 +195,24 @@ Node* LinkedList::mergeLists(Node* first, Node* second)
 
 long long LinkedList::ipToComparableValue(string ipStr)
 {
-    int octet1, octet2, octet3, octet4, port = 0;
-    char dummy; // Para ignorar los caracteres '.' y ':'
+    int 
+        octet1,
+        octet2,
+        octet3,
+        octet4,
+        port = 0
+    ;
+
+    char 
+        dummy
+    ;
     
     stringstream ss(ipStr);
 
-    // Extraer los octetos y el puerto (si existe)
     ss >> octet1 >> dummy >> octet2 >> dummy >> octet3 >> dummy >> octet4;
 
-    if (ss >> dummy >> port) {
-        // Se leyó un puerto, mantener el valor leído
-    }
-
-    // Convertir la IP a un valor de tipo long (usando cada octeto como parte del desplazamiento)
     long long ipValue = (static_cast<long long>(octet1) << 24) | (octet2 << 16) | (octet3 << 8) | octet4;
 
-    // Añadir el puerto (si existe) para mantener la diferencia
-    // Considerar el puerto en los bits menos significativos si es necesario (por ejemplo, max 65535)
     return ((ipValue << 16) | port);
 }
 
