@@ -16,8 +16,13 @@ public:
     void insertFirst(string data);
     void print();
     void realizarBusqueda();
-    void ordenarPorId();
     void exportToTxt(string fileName);
+
+    // Ordenamiento -->
+    void sortByIp();
+    Node* mergeSort(Node* head);
+    Node* split(Node* head);
+    Node* mergeLists(Node* first, Node* second);
 };
 
 LinkedList::LinkedList()
@@ -88,19 +93,9 @@ void LinkedList::realizarBusqueda()
     }
 }
 
-// Implementacion faltante
-void LinkedList::ordenarPorId()
+void LinkedList::sortByIp()
 {
-    // Ordenar elemnetos usando ipComparableValue
-
-    Node* temp = this->head;
-    while (temp) {
-        
-
-        // Logica aqui puto
-
-        temp = temp->next;
-    }
+    this->head = this->mergeSort(this->head);
 }
 
 void LinkedList::exportToTxt(string fileName)
@@ -114,4 +109,41 @@ void LinkedList::exportToTxt(string fileName)
         temp = temp->next;
     }
     file.close();
+}
+
+Node* LinkedList::mergeSort(Node* head) {
+
+    if (head == nullptr || head->next == nullptr)
+        return head;
+
+    Node* second = split(head);
+
+    head = mergeSort(head);
+    second = mergeSort(second);
+
+    return mergeLists(head, second);
+}
+
+Node* LinkedList::split(Node* head) {
+    Node *fast = head, *slow = head;
+    while (fast->next && fast->next->next) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    Node* temp = slow->next;
+    slow->next = nullptr;
+    return temp;
+}
+
+Node* LinkedList::mergeLists(Node* first, Node* second) {
+    if (!first) return second;
+    if (!second) return first;
+
+    if (first->ipComparableValue < second->ipComparableValue) {
+        first->next = mergeLists(first->next, second);
+        return first;
+    } else {
+        second->next = mergeLists(first, second->next);
+        return second;
+    }
 }
