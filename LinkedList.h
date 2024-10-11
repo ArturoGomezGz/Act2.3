@@ -115,7 +115,7 @@ void LinkedList::realizarBusqueda()
 
         if (ipToComparableValue(ipIni) < ipToComparableValue(ipFin))
         {
-            ofstream file("./busquedas/salida"+ to_string(contador) +"-Eq2.txt");
+            ofstream file("./salida"+ to_string(contador) +"-Eq2.txt");
             Node* actual = binarySearch(ipIni);
             while (actual->ipComparableValue <= ipToComparableValue(ipFin))
             {
@@ -142,7 +142,7 @@ void LinkedList::sortByIp()
 
 void LinkedList::exportToTxt(string fileName)
 {
-    ofstream file("./outputs/"+fileName+".txt");
+    ofstream file("./"+fileName+".txt");
     Node* temp = this->head;
     while (temp) {
         
