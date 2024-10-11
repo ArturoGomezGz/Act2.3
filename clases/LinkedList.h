@@ -16,6 +16,8 @@ public:
     void insertFirst(string data);
     void print();
     void realizarBusqueda();
+    void ordenarPorId();
+    void exportToTxt(string fileName);
 };
 
 LinkedList::LinkedList()
@@ -61,15 +63,14 @@ void LinkedList::insertFirst(string data)
 
 void LinkedList::print()
 {
-
     Node* temp = this->head; // Comenzar desde la cabeza
     while (temp) {
         temp->print();
         temp = temp->next;
     }
-    
 }
 
+// Implementacion faltante
 void LinkedList::realizarBusqueda()
 {
     bool continuar = true;
@@ -84,5 +85,35 @@ void LinkedList::realizarBusqueda()
         cout << "Deseas hacer otra busqueda? y/n" << endl;
         char opt = _getch();
         continuar = (opt == 'y');
+    }
+}
+
+// Implementacion faltante
+void LinkedList::ordenarPorId()
+{
+    // Ordenar elemnetos usando ipComparableValue
+
+    Node* temp = this->head;
+    while (temp) {
+        
+
+        // Logica aqui puto
+
+        temp = temp->next;
+    }
+}
+
+// Implementacion faltante
+void LinkedList::exportToTxt(string fileName)
+{
+    // Recorrer lista y escribir en documento
+
+    Node* temp = this->head;
+    while (temp) {
+        
+
+        // Logica aqui puto
+
+        temp = temp->next;
     }
 }
