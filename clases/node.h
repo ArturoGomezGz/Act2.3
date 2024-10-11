@@ -78,10 +78,16 @@ struct Node{
         this->razon = elemento;
     }
     
-    // Metodo para imprimir  linea de datoa en orden 
+    // Metodo para imprimir en consola linea de datoa en orden 
     void print()
     {
         cout << this->mes << " " << this->dia << " " << this->hora << " "<< this->ip << " " << this->razon << endl;
+    }
+
+    // Metodo para escribir linea de datoa en orden 
+    string writeLine() 
+    {
+        return this->mes + " " + this->dia + " " + this->hora + " " + this->ip + " " + this->razon;
     }
 
     // Función para convertir la IP a un valor comparable tipo long

@@ -9,7 +9,7 @@ int main()
 
     cout << list1.getHead()->ipComparableValue;
     
-    list1.realizarBusqueda();
+    list1.exportToTxt("bitacoraOrdenadaIP-Eq2");
     return 0;
 }
 

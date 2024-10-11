@@ -103,17 +103,15 @@ void LinkedList::ordenarPorId()
     }
 }
 
-// Implementacion faltante
 void LinkedList::exportToTxt(string fileName)
 {
-    // Recorrer lista y escribir en documento
-
+    ofstream file("./"+fileName+".txt");
     Node* temp = this->head;
     while (temp) {
         
-
-        // Logica aqui puto
-
+        file << temp->writeLine() << endl;
+        
         temp = temp->next;
     }
+    file.close();
 }
