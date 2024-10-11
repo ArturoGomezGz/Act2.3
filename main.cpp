@@ -8,8 +8,9 @@ int main()
     list1.addFile("bitacora-1");
 
     list1.sortByIp();
-    
     list1.exportToTxt("bitacoraOrdenadaIP-Eq2");
+    list1.realizarBusqueda();
+
     return 0;
 }
 

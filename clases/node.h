@@ -90,12 +90,12 @@ struct Node{
         return this->mes + " " + this->dia + " " + this->hora + " " + this->ip + " " + this->razon;
     }
 
-    // Función para convertir la IP a un valor comparable tipo long
-    void ipToComparableValue(){
+    // Metodo para convertir la IP a un valor comparable tipo long
+    long long ipToComparableValue(string ipStr){
         int octet1, octet2, octet3, octet4, port = 0;
         char dummy; // Para ignorar los caracteres '.' y ':'
         
-        stringstream ss(this->ip);
+        stringstream ss(ipStr);
 
         // Extraer los octetos y el puerto (si existe)
         ss >> octet1 >> dummy >> octet2 >> dummy >> octet3 >> dummy >> octet4;
@@ -109,7 +109,11 @@ struct Node{
 
         // Añadir el puerto (si existe) para mantener la diferencia
         // Considerar el puerto en los bits menos significativos si es necesario (por ejemplo, max 65535)
-        this->ipComparableValue = (ipValue << 16) | port;
+        return ((ipValue << 16) | port);
     }
 
+    // Función para actualizar la IP a un valor comparable tipo long
+    void ipToComparableValue(){
+        this->ipComparableValue = ipToComparableValue(this->ip);
+    }
 };
