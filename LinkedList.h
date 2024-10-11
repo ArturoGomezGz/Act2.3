@@ -5,19 +5,18 @@
 class LinkedList
 {
 private:
-    int size; 
-    Node *head;
+    int size;               // Tamaño de la linked list
+    Node *head;             // Head de la lista (primer elemento)
 
-    Node* mergeSort(Node* head);
-    Node* split(Node* head);
-    Node* mergeLists(Node* first, Node* second);
-
-    Node* binarySearch(string ip);
-    long long ipToComparableValue(string ipStr);
-public:
-    LinkedList();
-    ~LinkedList();
-    Node* getHead();
+    Node* mergeSort(Node* head);                        //   Descripcion de los metodos abajo
+    Node* split(Node* head);                            //                   |
+    Node* mergeLists(Node* first, Node* second);        //                   |                                
+    Node* binarySearch(string ip);                      //                   |
+    long long ipToComparableValue(string ipStr);        //           v       |       v
+public:                                                 //             v     |     v
+    LinkedList();                                       //               v   |   v
+    ~LinkedList();                                      //                 v | v 
+    Node* getHead();                                    //                   v   
     void addFileBySrc(string src);
     void addFile(string fileName);
     void insertFirst(string data);
@@ -27,21 +26,25 @@ public:
     void sortByIp();
 };
 
+// Constructor del objeto LinkedList (crea la lista vacia)
 LinkedList::LinkedList()
 {
     this->head = nullptr;
     this->size = 0;
 }
 
+// Destructor del objeto LinkedList
 LinkedList::~LinkedList()
 {
 }
 
+// Devuelve head de la lista
 Node* LinkedList::getHead()
 {
     return this->head;
 }
 
+// Carga la lista a partir de la ruta de un documento txt
 void LinkedList::addFileBySrc(string src)
 {
     ifstream file(src);  // Abre el archivo de texto
@@ -61,6 +64,7 @@ void LinkedList::addFileBySrc(string src)
     file.close();
 }
 
+// Carga la lista a partir del nombre un documento txt
 void LinkedList::addFile(string fileName)
 {
     ifstream file("./"+fileName+".txt");  // Abre el archivo de texto
@@ -80,6 +84,7 @@ void LinkedList::addFile(string fileName)
     file.close();
 }
 
+// Agrega un nuevo nodo al inicio de la lista a partir de un string 
 void LinkedList::insertFirst(string data)
 {
     Node* newNode = new Node(this->head, data);
@@ -87,6 +92,7 @@ void LinkedList::insertFirst(string data)
     this->size++;
 }
 
+// Recore la lista imprimiendo en consola los resultados
 void LinkedList::print()
 {
     Node* temp = this->head; // Comenzar desde la cabeza
@@ -96,6 +102,11 @@ void LinkedList::print()
     }
 }
 
+// Metodo para buscar nodos por ip
+// Pide al usuario 2 ips como rangos para buscar los nodos
+// Crea un archivo txt con los resultados obtenidos
+// Imprime los resultados en consola
+// Usa binary seach para encontrar el nodo inical y a parir de ahi recorre la lista imprimiendo y escibiendo en txt los ressultados hasta encontrar o sobrepasar el ip final (secuencial)
 void LinkedList::realizarBusqueda()
 {
     bool continuar = true;
@@ -135,11 +146,13 @@ void LinkedList::realizarBusqueda()
     }
 }
 
+// Metodo que llama mergesort para ourdenar la lista y actualizar la head por la lista ordenada 
 void LinkedList::sortByIp()
 {
     this->head = this->mergeSort(this->head);
 }
 
+// Metodo para exportar la lista a un archivo txt, recibe el nombre del archivo a crear o sobreescribir
 void LinkedList::exportToTxt(string fileName)
 {
     ofstream file("./"+fileName+".txt");
@@ -153,9 +166,9 @@ void LinkedList::exportToTxt(string fileName)
     file.close();
 }
 
+// Metodo que ordena la lista utilizando Merge Sort, recibe el head de la lsita desordenada y devuelve el head de la lista ordenada
 Node* LinkedList::mergeSort(Node* head)
 {
-
     if (head == nullptr || head->next == nullptr)
         return head;
 
@@ -167,6 +180,7 @@ Node* LinkedList::mergeSort(Node* head)
     return mergeLists(head, second);
 }
 
+// Metodo que divide la lista, recibe el head de la lista y devuelve el nodo a mitad de la lista
 Node* LinkedList::split(Node* head)
 {
     Node *fast = head, *slow = head;
@@ -179,6 +193,7 @@ Node* LinkedList::split(Node* head)
     return temp;
 }
 
+// Metodo que une dos listas previamente ordenadas en una sola, devielve en head de una lista ordenada 
 Node* LinkedList::mergeLists(Node* first, Node* second)
 {
     if (!first) return second;
@@ -193,6 +208,7 @@ Node* LinkedList::mergeLists(Node* first, Node* second)
     }
 }
 
+// Metod que genera un valor tipo long long a partir de ip (Sumamente util para comparar ips)
 long long LinkedList::ipToComparableValue(string ipStr)
 {
     int 
@@ -216,6 +232,7 @@ long long LinkedList::ipToComparableValue(string ipStr)
     return ((ipValue << 16) | port);
 }
 
+// Metodo que usa el metodo de busqueda binary search para encontrar un nodo con ip especifico (En caso de no encontrarlo, devuelve el nodo anterior a donde debeía estar)
 Node* LinkedList::binarySearch(string ipStr)
 {
     long long targetValue = ipToComparableValue(ipStr);
